@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType  {
+    ADMIN
+    RETAILER
+}
+
+model User {
+    id Int @id @default(autoincrement())
+    name String
+    login String 
+    password String
+    branch_id Int? 
+    user_type UserType
+    user_id Int? 
+    brands Brand[]
+    product_types ProductType[]
+    product_measures ProductMeasure[]
+    branches Branch[]
+    products Products[]
+    sales Sale[]
+    withdraws WithdrawBuilder[]
+}
+
+model Brand {
+    id Int @id @default(autoincrement())
+    name String @unique
+    user_id Int 
+    products Products[]
+    user User @relation(fields: [user_id], references: [id])
+}
+
+model ProductType {
+    id Int @id @default(autoincrement())
+    name String @unique
+    user_id Int 
+    products Products[]
+    user User @relation(fields: [user_id], references: [id])
+}
+model ProductMeasure {
+    id Int @id @default(autoincrement())
+    name String @unique
+    user_id Int 
+    products Products[]
+    user User @relation(fields: [user_id], references: [id])
+}
+
+model Branch {
+    id Int @id @default(autoincrement())
+    name String
+    user_id Int 
+    user User @relation(fields: [user_id], references: [id])
+}
+
+model Products {
+    id Int @id @default(autoincrement())
+    name String
+    price String
+    ball Int
+    brend_name String 
+    product_type_name String
+    product_measure_name String
+    product_measure ProductMeasure @relation(fields: [product_measure_name], references: [name])
+    product_type ProductType @relation(fields: [product_type_name], references: [name])
+    brend Brand @relation(fields: [brend_name], references: [name])
+    user_id Int 
+    user User @relation(fields: [user_id], references: [id])
+}
+
+model Builder {
+  id Int @id @default(autoincrement())
+  first_name String 
+  last_name String 
+  phone_number String
+  extra_phone String?
+  region String
+  address String
+  date_of_birth DateTime 
+  password String
+  img_url String?
+  ball Int @default(0)
+  withdraws WithdrawBuilder[]
+}
+
+enum SaleType {
+  SOLD
+  RETURN
+}
+model Sale {
+  id Int @id @default(autoincrement())
+  builder_id Int
+  branch_id Int
+  sold_products Json 
+  total_summa Int
+  total_ball Int 
+  sale_type SaleType 
+  user_id Int 
+  user User @relation(fields: [user_id], references: [id])
+}
+
+model WithdrawBuilder {
+  id Int @id @default(autoincrement())
+  builder_id Int
+  builder Builder @relation(fields: [builder_id], references: [id])
+  ball Int 
+  user_id Int
+  user User @relation(fields: [user_id], references: [id])
+}
