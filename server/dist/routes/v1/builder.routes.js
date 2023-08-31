@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const builder_controller_1 = require("../../controllers/builder.controller");
+const builderRouter = (0, express_1.Router)();
+builderRouter.get("/", builder_controller_1.get);
+builderRouter.post("/", builder_controller_1.create);
+builderRouter.post("/signup", builder_controller_1.signup);
+builderRouter.post("/login", builder_controller_1.login);
+exports.default = builderRouter;

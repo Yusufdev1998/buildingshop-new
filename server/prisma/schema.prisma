@@ -65,8 +65,8 @@ model Branch {
 model Products {
     id Int @id @default(autoincrement())
     name String
-    price String
-    ball Int
+    price Int
+    ball Int @default(0)
     brend_name String 
     product_type_name String
     product_measure_name String
@@ -79,14 +79,14 @@ model Products {
 
 model Builder {
   id Int @id @default(autoincrement())
-  first_name String 
-  last_name String 
-  phone_number String
-  extra_phone String?
-  region String
-  address String
+  first_name String @db.VarChar(255) 
+  last_name String @db.VarChar(255)
+  phone_number String @db.VarChar(255) @unique
+  extra_phone String? @db.VarChar(255)
+  region String @db.VarChar(255)
+  address String @db.VarChar(255)
   date_of_birth DateTime 
-  password String
+  password String @db.VarChar(255)
   img_url String?
   ball Int @default(0)
   withdraws WithdrawBuilder[]

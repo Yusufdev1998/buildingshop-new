@@ -16,8 +16,8 @@ exports.create = exports.get = void 0;
 const prisma_1 = __importDefault(require("../db/prisma"));
 const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const brends = yield prisma_1.default.brand.findMany();
-        res.json(brends);
+        const result = yield prisma_1.default.withdrawBuilder.findMany();
+        res.json(result);
     }
     catch (error) {
         res.status(400).send({ error: error.message });
@@ -26,14 +26,27 @@ const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.get = get;
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name } = req.body;
-        const brand = yield prisma_1.default.brand.create({
-            data: {
-                name,
-                user_id: req.user_id,
-            },
-        });
-        res.status(201).json(brand);
+        const { builder_id, ball } = req.body;
+        const [withdraw] = yield prisma_1.default.$transaction([
+            prisma_1.default.withdrawBuilder.create({
+                data: {
+                    builder_id,
+                    ball,
+                    user_id: req.user_id,
+                },
+            }),
+            prisma_1.default.builder.update({
+                where: {
+                    id: builder_id,
+                },
+                data: {
+                    ball: {
+                        decrement: ball,
+                    },
+                },
+            }),
+        ]);
+        res.status(201).json(withdraw);
     }
     catch (error) {
         res.status(400).send({ error: error });

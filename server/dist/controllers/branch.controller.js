@@ -16,7 +16,7 @@ exports.create = exports.get = void 0;
 const prisma_1 = __importDefault(require("../db/prisma"));
 const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const brends = yield prisma_1.default.brand.findMany();
+        const brends = yield prisma_1.default.branch.findMany();
         res.json(brends);
     }
     catch (error) {
@@ -27,13 +27,13 @@ exports.get = get;
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name } = req.body;
-        const brand = yield prisma_1.default.brand.create({
+        const branch = yield prisma_1.default.branch.create({
             data: {
                 name,
                 user_id: req.user_id,
             },
         });
-        res.status(201).json(brand);
+        res.status(201).json(branch);
     }
     catch (error) {
         res.status(400).send({ error: error });

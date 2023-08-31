@@ -16,8 +16,8 @@ exports.create = exports.get = void 0;
 const prisma_1 = __importDefault(require("../db/prisma"));
 const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const brends = yield prisma_1.default.brand.findMany();
-        res.json(brends);
+        const result = yield prisma_1.default.products.findMany();
+        res.json(result);
     }
     catch (error) {
         res.status(400).send({ error: error.message });
@@ -26,14 +26,19 @@ const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.get = get;
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name } = req.body;
-        const brand = yield prisma_1.default.brand.create({
+        const { name, price, ball, brend_name, product_type_name, product_measure_name, } = req.body;
+        const products = yield prisma_1.default.products.create({
             data: {
                 name,
                 user_id: req.user_id,
+                price,
+                ball,
+                brend_name,
+                product_measure_name,
+                product_type_name,
             },
         });
-        res.status(201).json(brand);
+        res.status(201).json(products);
     }
     catch (error) {
         res.status(400).send({ error: error });

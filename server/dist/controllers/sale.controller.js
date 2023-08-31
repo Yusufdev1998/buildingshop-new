@@ -16,7 +16,7 @@ exports.create = exports.get = void 0;
 const prisma_1 = __importDefault(require("../db/prisma"));
 const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const brends = yield prisma_1.default.brand.findMany();
+        const brends = yield prisma_1.default.sale.findMany();
         res.json(brends);
     }
     catch (error) {
@@ -26,14 +26,31 @@ const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.get = get;
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name } = req.body;
-        const brand = yield prisma_1.default.brand.create({
-            data: {
-                name,
-                user_id: req.user_id,
-            },
-        });
-        res.status(201).json(brand);
+        const { builder_id, branch_id, sold_products, total_summa, total_ball, sale_type, } = req.body;
+        const [sale] = yield prisma_1.default.$transaction([
+            prisma_1.default.sale.create({
+                data: {
+                    builder_id,
+                    branch_id,
+                    sold_products,
+                    total_summa,
+                    total_ball,
+                    sale_type,
+                    user_id: req.user_id,
+                },
+            }),
+            prisma_1.default.builder.update({
+                where: {
+                    id: builder_id,
+                },
+                data: {
+                    ball: {
+                        increment: total_ball,
+                    },
+                },
+            }),
+        ]);
+        res.status(201).json(sale);
     }
     catch (error) {
         res.status(400).send({ error: error });

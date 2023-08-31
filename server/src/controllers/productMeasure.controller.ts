@@ -4,7 +4,7 @@ import { customRequest } from "../middlewares/auth";
 
 export const get = async (req: Request, res: Response) => {
   try {
-    const brends = await prisma.brand.findMany();
+    const brends = await prisma.productMeasure.findMany();
     res.json(brends);
   } catch (error: any) {
     res.status(400).send({ error: error.message });
@@ -14,13 +14,13 @@ export const get = async (req: Request, res: Response) => {
 export const create = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
-    const brand = await prisma.brand.create({
+    const productMeasure = await prisma.productMeasure.create({
       data: {
         name,
         user_id: (req as customRequest).user_id,
       },
     });
-    res.status(201).json(brand);
+    res.status(201).json(productMeasure);
   } catch (error: any) {
     res.status(400).send({ error: error });
   }
