@@ -10,12 +10,21 @@ const brend_routes_1 = __importDefault(require("./brend.routes"));
 const productType_routes_1 = __importDefault(require("./productType.routes"));
 const productMeasure_routes_1 = __importDefault(require("./productMeasure.routes"));
 const product_routes_1 = __importDefault(require("./product.routes"));
+const builder_routes_1 = __importDefault(require("./builder.routes"));
+const sale_routes_1 = __importDefault(require("./sale.routes"));
+const withdraw_routes_1 = __importDefault(require("./withdraw.routes"));
+const branch_routes_1 = __importDefault(require("./branch.routes"));
 const v1Routes = (0, express_1.Router)();
 // user
 v1Routes.use("/user", user_routes_1.default);
 // Services
 v1Routes.use("/brands", auth_1.default, brend_routes_1.default);
+v1Routes.use("/branches", auth_1.default, branch_routes_1.default);
 v1Routes.use("/product-types", auth_1.default, productType_routes_1.default);
 v1Routes.use("/product-measures", auth_1.default, productMeasure_routes_1.default);
 v1Routes.use("/products", auth_1.default, product_routes_1.default);
+v1Routes.use("/builders", auth_1.default, builder_routes_1.default);
+// Sale
+v1Routes.use("/sales", auth_1.default, sale_routes_1.default);
+v1Routes.use("/withdraws", auth_1.default, withdraw_routes_1.default);
 exports.default = v1Routes;
