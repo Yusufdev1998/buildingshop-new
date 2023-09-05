@@ -27,4 +27,6 @@ v1Routes.use("/builders", auth_1.default, builder_routes_1.default);
 // Sale
 v1Routes.use("/sales", auth_1.default, sale_routes_1.default);
 v1Routes.use("/withdraws", auth_1.default, withdraw_routes_1.default);
+// Reports
+v1Routes.use("/reports", auth_1.default);
 exports.default = v1Routes;

@@ -5,4 +5,6 @@ const brend_controller_1 = require("../../controllers/brend.controller");
 const brendRouter = (0, express_1.Router)();
 brendRouter.get("/", brend_controller_1.get);
 brendRouter.post("/", brend_controller_1.create);
+brendRouter.patch("/:id", brend_controller_1.update);
+brendRouter.delete("/:id", brend_controller_1.destroy);
 exports.default = brendRouter;

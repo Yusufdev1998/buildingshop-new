@@ -5,6 +5,6 @@ const builder_controller_1 = require("../../controllers/builder.controller");
 const builderRouter = (0, express_1.Router)();
 builderRouter.get("/", builder_controller_1.get);
 builderRouter.post("/", builder_controller_1.create);
-builderRouter.post("/signup", builder_controller_1.signup);
-builderRouter.post("/login", builder_controller_1.login);
+builderRouter.patch("/:id", builder_controller_1.update);
+builderRouter.delete("/:id", builder_controller_1.destroy);
 exports.default = builderRouter;

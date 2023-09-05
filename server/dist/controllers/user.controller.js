@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.createUser = void 0;
+exports.destroy = exports.update = exports.login = exports.createUser = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const prisma_1 = __importDefault(require("../db/prisma"));
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -63,3 +63,35 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.login = login;
+const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    const id = req.params.id;
+    try {
+        const updated = yield prisma_1.default.user.update({
+            where: {
+                id: +id,
+            },
+            data,
+        });
+        res.json(updated);
+    }
+    catch (error) {
+        res.status(400).send({ error: error });
+    }
+});
+exports.update = update;
+const destroy = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const user = yield prisma_1.default.user.delete({
+            where: {
+                id: Number(id),
+            },
+        });
+        res.status(200).json(user);
+    }
+    catch (error) {
+        res.status(400).send({ error: error });
+    }
+});
+exports.destroy = destroy;

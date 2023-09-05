@@ -5,4 +5,6 @@ const productType_controller_1 = require("../../controllers/productType.controll
 const productTypeRouter = (0, express_1.Router)();
 productTypeRouter.get("/", productType_controller_1.get);
 productTypeRouter.post("/", productType_controller_1.create);
+productTypeRouter.patch("/:id", productType_controller_1.update);
+productTypeRouter.delete("/:id", productType_controller_1.destroy);
 exports.default = productTypeRouter;

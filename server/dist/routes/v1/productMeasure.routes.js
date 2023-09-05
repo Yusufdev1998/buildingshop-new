@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const productMeasure_controller_1 = require("../../controllers/productMeasure.controller");
-const productMeasure = (0, express_1.Router)();
-productMeasure.get("/", productMeasure_controller_1.get);
-productMeasure.post("/", productMeasure_controller_1.create);
-exports.default = productMeasure;
+const productMeasureRouter = (0, express_1.Router)();
+productMeasureRouter.get("/", productMeasure_controller_1.get);
+productMeasureRouter.post("/", productMeasure_controller_1.create);
+productMeasureRouter.patch("/:id", productMeasure_controller_1.update);
+productMeasureRouter.delete("/:id", productMeasure_controller_1.destroy);
+exports.default = productMeasureRouter;

@@ -90,6 +90,7 @@ model Builder {
   img_url String?
   ball Int @default(0)
   withdraws WithdrawBuilder[]
+  sales Sale[]
 }
 
 enum SaleType {
@@ -99,11 +100,14 @@ enum SaleType {
 model Sale {
   id Int @id @default(autoincrement())
   builder_id Int
+  builder Builder @relation(fields: [builder_id], references: [id])
   branch_id Int
   sold_products Json 
   total_summa Int
   total_ball Int 
   sale_type SaleType 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
   user_id Int 
   user User @relation(fields: [user_id], references: [id])
 }
@@ -113,6 +117,8 @@ model WithdrawBuilder {
   builder_id Int
   builder Builder @relation(fields: [builder_id], references: [id])
   ball Int 
-  user_id Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt 
+  user_id Int 
   user User @relation(fields: [user_id], references: [id])
 }

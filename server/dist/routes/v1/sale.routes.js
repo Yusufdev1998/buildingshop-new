@@ -5,4 +5,6 @@ const sale_controller_1 = require("../../controllers/sale.controller");
 const saleRouter = (0, express_1.Router)();
 saleRouter.get("/", sale_controller_1.get);
 saleRouter.post("/", sale_controller_1.create);
+saleRouter.patch("/:id", sale_controller_1.update);
+saleRouter.delete("/:id", sale_controller_1.destroy);
 exports.default = saleRouter;

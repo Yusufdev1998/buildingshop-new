@@ -52,3 +52,33 @@ export const login = async (req: Request, res: Response) => {
     res.status(400).send({ error: error.message });
   }
 };
+
+export const update = async (req: Request, res: Response) => {
+  const data = req.body;
+  const id = req.params.id;
+  try {
+    const updated = await prisma.user.update({
+      where: {
+        id: +id,
+      },
+      data,
+    });
+    res.json(updated);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
+export const destroy = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const user = await prisma.user.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    res.status(200).json(user);
+  } catch (error: any) {
+    res.status(400).send({ error: error });
+  }
+};

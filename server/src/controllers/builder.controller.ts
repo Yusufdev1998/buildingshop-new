@@ -108,3 +108,33 @@ export const login = async (req: Request, res: Response) => {
     res.status(400).send({ error: error });
   }
 };
+
+export const update = async (req: Request, res: Response) => {
+  const data = req.body;
+  const id = req.params.id;
+  try {
+    const updated = await prisma.builder.update({
+      where: {
+        id: +id,
+      },
+      data,
+    });
+    res.json(updated);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
+export const destroy = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const builder = await prisma.builder.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    res.status(200).json(builder);
+  } catch (error: any) {
+    res.status(400).send({ error: error });
+  }
+};

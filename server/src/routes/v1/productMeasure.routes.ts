@@ -1,9 +1,16 @@
 import { Router } from "express";
-import { create, get } from "../../controllers/productMeasure.controller";
+import {
+  get,
+  create,
+  update,
+  destroy,
+} from "../../controllers/productMeasure.controller";
 
-const productMeasure = Router();
+const productMeasureRouter = Router();
 
-productMeasure.get("/", get);
-productMeasure.post("/", create);
+productMeasureRouter.get("/", get);
+productMeasureRouter.post("/", create);
+productMeasureRouter.patch("/:id", update);
+productMeasureRouter.delete("/:id", destroy);
 
-export default productMeasure;
+export default productMeasureRouter;

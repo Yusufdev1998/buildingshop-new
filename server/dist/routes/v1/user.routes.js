@@ -5,4 +5,6 @@ const express_1 = require("express");
 const userRouter = (0, express_1.Router)();
 userRouter.post("/signup", user_controller_1.createUser);
 userRouter.post("/login", user_controller_1.login);
+userRouter.patch("/:id", user_controller_1.update);
+userRouter.delete("/:id", user_controller_1.destroy);
 exports.default = userRouter;
