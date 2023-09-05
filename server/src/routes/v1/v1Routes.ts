@@ -26,4 +26,7 @@ v1Routes.use("/builders", auth, builderRouter);
 v1Routes.use("/sales", auth, saleRouter);
 v1Routes.use("/withdraws", auth, withdrawRouter);
 
+// Reports
+v1Routes.use("/reports", auth);
+
 export default v1Routes;
