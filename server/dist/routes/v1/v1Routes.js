@@ -15,6 +15,10 @@ const sale_routes_1 = __importDefault(require("./sale.routes"));
 const withdraw_routes_1 = __importDefault(require("./withdraw.routes"));
 const branch_routes_1 = __importDefault(require("./branch.routes"));
 const v1Routes = (0, express_1.Router)();
+// ping
+v1Routes.use("/", (req, res) => {
+    res.send("Hello");
+});
 // user
 v1Routes.use("/user", user_routes_1.default);
 // Services
