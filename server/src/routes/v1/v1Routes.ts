@@ -12,6 +12,11 @@ import branchRouter from "./branch.routes";
 
 const v1Routes = Router();
 
+// ping
+v1Routes.use("/", (req, res) => {
+  res.send("Hello");
+});
+
 // user
 v1Routes.use("/user", userRouter);
 // Services
