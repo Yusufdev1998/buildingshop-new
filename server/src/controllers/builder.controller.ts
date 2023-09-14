@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import prisma from "../db/prisma";
-import { customRequest } from "../middlewares/auth";
 
 export const get = async (req: Request, res: Response) => {
   try {

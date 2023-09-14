@@ -25,6 +25,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { login, password } = req.body;
+
     const user = await prisma.user.findUnique({
       where: {
         login,
@@ -36,7 +37,7 @@ export const login = async (req: Request, res: Response) => {
         { user_id: user.id, user_type: user.user_type },
         process.env.TOKEN_SECRET as string,
         {
-          expiresIn: "30d",
+          expiresIn: "1d",
         }
       );
       res.json({

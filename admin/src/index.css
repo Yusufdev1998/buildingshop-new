@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --main-color: #0044c5;
+}
+html,
+body,
+#root,
+.main-layout {
+  height: 100%;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.sidebar,
+.sidebar-menu {
+  background-color: var(--main-color) !important;
+}
+.logo {
+  background-color: #0b50d3;
+  padding: 12px 15px;
+  margin-bottom: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.search-input {
+  max-width: 275px;
+  background-color: #f3f3f3;
+}
+
+:where(.css-dev-only-do-not-override-18iikkb).ant-input-affix-wrapper
+  > input.ant-input {
+  background-color: inherit;
+}
+
+.page-actions {
+  margin-bottom: 24px;
+}
+
+.login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  background-color: #eee;
+  padding: 15px;
+  border-radius: 10px;
+}
