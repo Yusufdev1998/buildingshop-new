@@ -1,0 +1,16 @@
+export default [
+  "Farg`ona viloyati",
+  "Andijon viloyati",
+  "Buxoro viloyati",
+  "Jizzax viloyati",
+  "Qashqadaryo viloyati",
+  "Navoiy viloyati",
+  "Namangan viloyati",
+  "Samarqand viloyati",
+  "Surxondaryo viloyati",
+  "Sirdaryo viloyati",
+  "Toshkent viloyati",
+  "Qoraqalpog`iston Respublikasi",
+  "Xorazm viloyati",
+  "Toshkent shahri",
+];

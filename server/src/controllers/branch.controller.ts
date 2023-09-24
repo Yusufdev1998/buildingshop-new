@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../db/prisma";
-import { customRequest } from "../middlewares/auth";
+import { customRequest } from "../middlewares/AdminAuth";
 
 export const get = async (req: Request, res: Response) => {
   try {

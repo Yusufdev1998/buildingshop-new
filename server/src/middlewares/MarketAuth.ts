@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 export interface customRequest extends Request {
   user_id: number;
+  branch: string;
 }
 
 export default (req: Request, res: Response, next: NextFunction) => {
@@ -12,7 +13,12 @@ export default (req: Request, res: Response, next: NextFunction) => {
       token as string,
       process.env.TOKEN_SECRET as string
     );
+    if ((decoded as { user_type: string }).user_type !== "RETAILER") {
+      throw new Error("Hacker captured!!!");
+    }
+
     (req as customRequest).user_id = (decoded as { user_id: number }).user_id;
+    (req as customRequest).branch = (decoded as { branch: string }).branch;
     next();
   } catch (error: any) {
     res.status(403).send({ error: error.message });

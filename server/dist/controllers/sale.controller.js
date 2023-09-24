@@ -121,6 +121,14 @@ const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                         total_ball,
                         user_id: req.user_id,
                     },
+                    include: {
+                        builder: {
+                            select: {
+                                first_name: true,
+                                last_name: true,
+                            },
+                        },
+                    },
                 }),
                 prisma_1.default.builder.update({
                     where: {
@@ -133,7 +141,7 @@ const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     },
                 }),
             ]);
-            res.status(201).json(sale);
+            res.status(200).json(sale);
         }
         else {
             throw new Error("Sale not found");

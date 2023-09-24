@@ -30,7 +30,10 @@ body {
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
+  padding: 10px 20px;
+  border-bottom: 2px solid #eee;
 }
 .search-input {
   max-width: 275px;
@@ -57,4 +60,22 @@ body {
   background-color: #eee;
   padding: 15px;
   border-radius: 10px;
+}
+
+.savdo_area {
+  display: grid;
+  margin-top: 20px;
+  padding: 0 15px;
+  padding-bottom: 15px;
+  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+}
+.clickable-row {
+  cursor: pointer;
+}
+
+.modal_title {
+  color: var(--main-color);
+  background-color: var(--back);
+  padding: 16px;
 }

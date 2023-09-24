@@ -44,10 +44,14 @@ const getBuildersReport = (req, res) => __awaiter(void 0, void 0, void 0, functi
         else {
             result = yield prisma_1.default.builder.findMany({
                 select: {
+                    id: true,
                     first_name: true,
                     last_name: true,
                     phone_number: true,
                     ball: true,
+                },
+                orderBy: {
+                    ball: "desc",
                 },
             });
         }

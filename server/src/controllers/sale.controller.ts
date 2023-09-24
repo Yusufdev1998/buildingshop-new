@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../db/prisma";
-import { customRequest } from "../middlewares/auth";
+import { customRequest } from "../middlewares/AdminAuth";
 
 export const get = async (req: Request, res: Response) => {
   try {
@@ -120,6 +120,14 @@ export const update = async (req: Request, res: Response) => {
             total_ball,
             user_id: (req as customRequest).user_id,
           },
+          include: {
+            builder: {
+              select: {
+                first_name: true,
+                last_name: true,
+              },
+            },
+          },
         }),
         prisma.builder.update({
           where: {
@@ -132,7 +140,7 @@ export const update = async (req: Request, res: Response) => {
           },
         }),
       ]);
-      res.status(201).json(sale);
+      res.status(200).json(sale);
     } else {
       throw new Error("Sale not found");
     }

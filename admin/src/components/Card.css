@@ -1,0 +1,77 @@
+.card_area {
+  height: calc(100vh - 112px);
+  padding: 13px 0px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+.card_header h3 {
+  font-weight: normal;
+  color: #333333;
+}
+.card_header {
+  padding: 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.card_item {
+  padding: 5px 20px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+}
+.card_item_active {
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #87ceeb;
+  justify-content: space-between;
+}
+.card_info {
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+
+.card_actions {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 15px 30px;
+  justify-content: space-between;
+}
+.card_actions .ant-btn {
+  color: var(--main-color);
+  background-color: #f6f8ff;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding: 20px 32px;
+}
+.card_body {
+  height: calc(100% - 250px);
+  overflow-y: auto;
+}
+
+.card_submit {
+  display: flex;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  padding: 15px 30px;
+  justify-content: space-between;
+}
+.card_submit .ant-btn {
+  border: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 20px;
+  font-weight: normal !important;
+}
+.card_submit span,
+svg {
+  display: block !important;
+}

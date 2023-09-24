@@ -9,7 +9,7 @@ const axiosFetch = axios.create({
 
 axiosFetch.interceptors.request.use(
   config => {
-    config.headers.Authorization = `Bearer ${getUserData().token}`;
+    config.headers.Authorization = `Bearer ${getUserData()?.token}`;
     return config;
   },
   error => Promise.reject(error)
@@ -20,9 +20,9 @@ axiosFetch.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response.status === 403) {
-      location.href = "/login";
+    if (error.response?.status === 403) {
       localStorage.removeItem("user");
+      // window.location.href = "/login";
     }
     return Promise.reject(error);
   }

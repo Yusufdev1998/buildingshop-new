@@ -9,6 +9,8 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
   const onFinish = async (values: any) => {
+    console.log(values);
+
     try {
       setLoading(true);
       const res = await axiosFetch({
@@ -19,7 +21,6 @@ const Login: React.FC = () => {
       localStorage.setItem("user", JSON.stringify(res.data));
       navigate("/");
     } catch (error: any) {
-      message.error(error.response.data.error);
       console.log(error);
     } finally {
       setLoading(false);

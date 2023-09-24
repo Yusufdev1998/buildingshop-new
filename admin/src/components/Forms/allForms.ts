@@ -1,3 +1,9 @@
 export const BRAND_FORM = "BRAND_FORM";
 export const PRODUCT_TYPE_FORM = "PRODUCT_TYPE_FORM";
 export const PRODUCT_MEASURE_FORM = "PRODUCT_MEASURE_FORM";
+export const PRODUCT_FORM = "PRODUCT_FORM";
+export const BUILDER_FORM = "BUILDER_FORM";
+export const BRANCH_FORM = "BRANCH_FORM";
+export const USER_FORM = "USER_FORM";
+export const SALE_FORM = "SALE_FORM";
+export const MARKET_SALE_FORM = "MARKET_SALE_FORM";

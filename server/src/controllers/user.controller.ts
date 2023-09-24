@@ -3,18 +3,41 @@ import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import prisma from "../db/prisma";
 
+export const get = async (req: Request, res: Response) => {
+  try {
+    const result = await prisma.user.findMany();
+    res.json(result);
+  } catch (error: any) {
+    console.log(error);
+
+    res.status(400).send({ error: error.message });
+  }
+};
+
+enum UserType {
+  ADMIN = "ADMIN",
+  RETAILER = "RETAILER",
+}
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { name, login, password } = req.body;
-    await prisma.user.create({
+    const { name, login, password, branch } = req.body;
+    let user_type;
+    if (branch) {
+      user_type = UserType.RETAILER;
+    } else {
+      user_type = UserType.ADMIN;
+    }
+
+    const result = await prisma.user.create({
       data: {
         name,
         login,
         password,
-        user_type: "ADMIN",
+        user_type,
+        branch,
       },
     });
-    res.send({ message: "User created" });
+    res.status(201).send(result);
   } catch (error: any) {
     console.log(error);
 
@@ -34,7 +57,7 @@ export const login = async (req: Request, res: Response) => {
     });
     if (user) {
       const token = jwt.sign(
-        { user_id: user.id, user_type: user.user_type },
+        { user_id: user.id, user_type: user.user_type, branch: user.branch },
         process.env.TOKEN_SECRET as string,
         {
           expiresIn: "1d",

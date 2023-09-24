@@ -20,7 +20,8 @@ model User {
     name String
     login String @unique
     password String
-    branch_id Int? 
+    branch String? @unique
+    branch_name Branch? @relation(name: "branch_name", fields: [branch], references: [name])
     user_type UserType
     user_id Int? 
     brands Brand[]
@@ -57,9 +58,10 @@ model ProductMeasure {
 
 model Branch {
     id Int @id @default(autoincrement())
-    name String
+    name String @unique
     user_id Int 
     user User @relation(fields: [user_id], references: [id])
+    user_in_branch User? @relation(name: "branch_name")
 }
 
 model Products {
@@ -85,7 +87,7 @@ model Builder {
   extra_phone String? 
   region String 
   address String 
-  date_of_birth DateTime 
+  date_of_birth String 
   password String 
   img_url String?
   ball Int @default(0)
@@ -101,7 +103,7 @@ model Sale {
   id Int @id @default(autoincrement())
   builder_id Int
   builder Builder @relation(fields: [builder_id], references: [id])
-  branch_id Int
+  branch String?
   sold_products Json 
   total_summa Int
   total_ball Int 

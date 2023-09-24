@@ -30,10 +30,14 @@ export const getBuildersReport = async (req: Request, res: Response) => {
     } else {
       result = await prisma.builder.findMany({
         select: {
+          id: true,
           first_name: true,
           last_name: true,
           phone_number: true,
           ball: true,
+        },
+        orderBy: {
+          ball: "desc",
         },
       });
     }

@@ -16,6 +16,7 @@ const ColumnEdit: React.FC<{ record: any; config: any }> = ({
         initialValues: record,
         method: "edit",
         component: config.drawerComponent,
+        width: config.width || 320,
       })
     );
   };

@@ -1,14 +1,25 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, ConfigProvider, Input } from "antd";
+import {
+  Layout,
+  Menu,
+  Button,
+  theme,
+  ConfigProvider,
+  Input,
+  Row,
+  Col,
+} from "antd";
 import allPages from "../pages/allPages";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import BasicDrawer from "../components/BasicDrawer";
-import useSearch from "../hooks/useSearch";
+
+import Header from "./Header";
 const { Sider, Content } = Layout;
 
 const MainLayout: React.FC = () => {
@@ -38,8 +49,6 @@ const MainLayout: React.FC = () => {
       icon: page.icon,
     }));
   }, []);
-
-  const { onSearch } = useSearch();
 
   return (
     <Layout className="main-layout">
@@ -84,32 +93,7 @@ const MainLayout: React.FC = () => {
         </ConfigProvider>
       </Sider>
       <Layout>
-        <div className="header">
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
-          <Input
-            className="search-input"
-            allowClear
-            onChange={onSearch}
-            prefix={
-              <SearchOutlined
-                style={{
-                  fontSize: 18,
-                  color: "var(--main-color)",
-                }}
-              />
-            }
-            placeholder="Qidiruv..."
-          ></Input>
-        </div>
+        <Header collapsed={collapsed} setCollapsed={setCollapsed}></Header>
         <Content
           style={{
             margin: "24px 16px",

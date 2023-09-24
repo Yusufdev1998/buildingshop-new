@@ -5,6 +5,14 @@ import ProductType from "./pages/ProductType";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProductMeasure from "./pages/ProductMeasure";
+import Products from "./pages/Products";
+import Builders from "./pages/Builders";
+import Branch from "./pages/Branch";
+import Users from "./pages/Users";
+import Sale from "./pages/Sale";
+import Report from "./pages/Report";
+import Market from "./pages/Market";
+import MarketProtected from "./components/MarketProtected";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +35,43 @@ const router = createBrowserRouter([
         path: "product-measures",
         element: <ProductMeasure></ProductMeasure>,
       },
+      {
+        path: "products",
+        element: <Products></Products>,
+      },
+      {
+        path: "builders",
+        element: <Builders></Builders>,
+      },
+      {
+        path: "branches",
+        element: <Branch></Branch>,
+      },
+      {
+        path: "users",
+        element: <Users></Users>,
+      },
+      {
+        path: "sales",
+        element: <Sale></Sale>,
+      },
+      {
+        path: "reports",
+        element: <Report></Report>,
+      },
     ],
   },
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/market",
+    element: (
+      <MarketProtected>
+        <Market></Market>
+      </MarketProtected>
+    ),
   },
 ]);
 
